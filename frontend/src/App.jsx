@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HomeRoute from 'routes/HomeRoute';
+import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 
 import './App.scss';
 
@@ -8,9 +9,15 @@ import mockTopicData from 'mocks/topics';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
+  const [displayModal, setDisplayModal] = useState(false);
   return (
     <div className='App'>
-      <HomeRoute photos={mockPhotoData} topics={mockTopicData} />
+      <HomeRoute
+        setDisplayModal={setDisplayModal}
+        photos={mockPhotoData}
+        topics={mockTopicData}
+      />
+      {displayModal && <PhotoDetailsModal />}
     </div>
   );
 };
