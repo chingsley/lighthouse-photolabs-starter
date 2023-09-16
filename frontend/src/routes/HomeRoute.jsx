@@ -8,11 +8,14 @@ const HomeRoute = (props) => {
 
   const toggleFavourite = (photoId) => {
     // If it does, it will remove it from the state
+    // OR
     if (favourites.includes(photoId)) {
-      const copyOfFavourites = [...favourites].filter(
-        (favPhotoId) => favPhotoId !== photoId
-      );
-      setFavourites(copyOfFavourites);
+      setFavourites((prev) => prev.filter((id) => id !== photoId));
+      // OR
+      // const copyOfFavourites = [...favourites].filter(
+      //   (favPhotoId) => favPhotoId !== photoId
+      // );
+      // setFavourites(copyOfFavourites);
       return;
     }
     // Else it will add it if it doesn't exist
@@ -21,7 +24,10 @@ const HomeRoute = (props) => {
 
   return (
     <div className='home-route'>
-      <TopNavigation topics={props.topics} />
+      <TopNavigation
+        topics={props.topics}
+        isFavPhotoExist={favourites.length > 0}
+      />
       <PhotoList
         photos={props.photos}
         favourites={favourites}
