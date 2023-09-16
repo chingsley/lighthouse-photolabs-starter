@@ -16,7 +16,11 @@ const PhotoListItem = (props) => {
         photoId={props.photo.id}
         favourites={props.favourites}
       />
-      <img className='photo-list__image' src={imageSource} />
+      <img
+        className='photo-list__image'
+        src={imageSource}
+        onClick={() => props.setDisplayModal(true)}
+      />
       <div className='photo-list__user-details '>
         <img className='photo-list__user-profile' src={user.profile} />
         <div className='photo-list__user-info'>

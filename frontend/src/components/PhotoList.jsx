@@ -13,6 +13,7 @@ const PhotoList = (props) => {
           imageSource={photo.urls.regular}
           toggleFavourite={props.toggleFavourite}
           favourites={props.favourites}
+          setDisplayModal={props.setDisplayModal}
         />
       ))}
     </ul>
