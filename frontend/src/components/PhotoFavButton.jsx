@@ -3,17 +3,17 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
-  const [favouritePhoto, setFavouritePhoto] = useState(false);
-
+function PhotoFavButton(props) {
   const toggleFavouritePhoto = () => {
-    setFavouritePhoto((prev) => !prev);
+    props.toggleFavourite(props.photoId);
   };
+
+  const colorCheck = props.favourites.includes(props.photoId);
 
   return (
     <div onClick={toggleFavouritePhoto} className='photo-list__fav-icon'>
       <div className='photo-list__fav-icon-svg'>
-        <FavIcon selected={favouritePhoto} />
+        <FavIcon selected={colorCheck} />
       </div>
     </div>
   );

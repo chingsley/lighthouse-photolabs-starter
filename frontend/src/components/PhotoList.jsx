@@ -11,6 +11,8 @@ const PhotoList = (props) => {
           key={photo.id}
           photo={photo}
           imageSource={photo.urls.regular}
+          toggleFavourite={props.toggleFavourite}
+          favourites={props.favourites}
         />
       ))}
     </ul>
