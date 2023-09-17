@@ -2,9 +2,10 @@ import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
+import PhotoList from 'components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
-  console.log('>>>>>>>>', props.selectedPhoto); // this will be logged twice due to <React.StrictMode> in index.jsx
+  // console.log('>>>>>>>>', props.selectedPhoto); // this will be logged twice due to <React.StrictMode> in index.jsx
   return (
     <div className='photo-details-modal'>
       <button
@@ -13,6 +14,36 @@ const PhotoDetailsModal = (props) => {
       >
         <img src={closeSymbol} alt='close symbol' />
       </button>
+      <div className='photo-details-modal__images'>
+        {/* <PhotoFavButton toggleFavourite={props.toggleFavourite} photoId={props.photo.id} favourites={props.favourites} /> */}
+        <img
+          // onClick={() => props.setDisplayModal(props.singlePhotoDetail)}
+          className='photo-details-modal__image'
+          src={props.selectedPhoto.urls.full}
+        />
+        <div className='photo-details-modal__photographer-details '>
+          <img
+            className='photo-details-modal__photographer-profile'
+            src={props.selectedPhoto.user.profile}
+          />
+          <div className='photo-details-modal__photographer-info'>
+            {props.selectedPhoto.user.name}
+            <div className='photo-details-modal__photographer-location'>
+              {props.selectedPhoto.location.city},
+              {props.selectedPhoto.location.country}
+            </div>
+          </div>
+        </div>
+        <div className='photo-details-modal__header'>Similar Photos</div>
+        <div className='photo-details-modal__images'>
+          {
+            <PhotoList
+              photos={Object.values(props.selectedPhoto.similar_photos)}
+              favourites={[]}
+            />
+          }
+        </div>
+      </div>
     </div>
   );
 };
