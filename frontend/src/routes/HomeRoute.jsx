@@ -33,6 +33,7 @@ const HomeRoute = (props) => {
         favourites={favourites}
         toggleFavourite={toggleFavourite}
         setDisplayModal={props.setDisplayModal}
+        viewModal={props.viewModal}
       />
     </div>
   );
