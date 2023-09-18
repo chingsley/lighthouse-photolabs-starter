@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
   // console.log('>>>>>>>>', props.selectedPhoto); // this will be logged twice due to <React.StrictMode> in index.jsx
@@ -15,13 +16,17 @@ const PhotoDetailsModal = (props) => {
         <img src={closeSymbol} alt='close symbol' />
       </button>
       <div className='photo-details-modal__images'>
-        {/* <PhotoFavButton toggleFavourite={props.toggleFavourite} photoId={props.photo.id} favourites={props.favourites} /> */}
+        <PhotoFavButton
+          toggleFavourite={props.toggleFavourite}
+          photoId={props.selectedPhoto.id}
+          favourites={props.favourites}
+        />
         <img
           // onClick={() => props.setDisplayModal(props.singlePhotoDetail)}
           className='photo-details-modal__image'
           src={props.selectedPhoto.urls.full}
         />
-        <div className='photo-details-modal__photographer-details '>
+        <div className='photo-details-modal__photographer-details'>
           <img
             className='photo-details-modal__photographer-profile'
             src={props.selectedPhoto.user.profile}
@@ -39,7 +44,8 @@ const PhotoDetailsModal = (props) => {
           {
             <PhotoList
               photos={Object.values(props.selectedPhoto.similar_photos)}
-              favourites={[]}
+              favourites={props.favourites}
+              toggleFavourite={props.toggleFavourite}
             />
           }
         </div>
