@@ -15,7 +15,6 @@ const HomeRoute = (props) => {
         favourites={props.favourites}
         toggleFavourite={props.toggleFavourite}
         setDisplayModal={props.setDisplayModal}
-        viewModal={props.viewModal}
       />
     </div>
   );
