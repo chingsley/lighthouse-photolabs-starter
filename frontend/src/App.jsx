@@ -2,8 +2,8 @@ import React from 'react';
 import './App.scss';
 import useApplicationData from 'hooks/useApplicationData';
 import HomeRoute from 'routes/HomeRoute';
-import mockPhotoData from 'mocks/photos';
-import mockTopicData from 'mocks/topics';
+// import mockPhotoData from 'mocks/photos';
+// import mockTopicData from 'mocks/topics';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 // Note: Rendering a single component to build components in isolation
 const App = () => {
@@ -12,13 +12,15 @@ const App = () => {
     updateToFavPhotoIds,
     onClosePhotoDetailsModal,
     setPhotoSelected,
+    onTopicSelect,
   } = useApplicationData();
 
   return (
     <div className='App'>
       <HomeRoute
-        photos={mockPhotoData}
-        topics={mockTopicData}
+        onTopicSelect={onTopicSelect}
+        photos={state.photoData}
+        topics={state.topicData}
         setDisplayModal={setPhotoSelected}
         favourites={state.favourites}
         toggleFavourite={updateToFavPhotoIds}

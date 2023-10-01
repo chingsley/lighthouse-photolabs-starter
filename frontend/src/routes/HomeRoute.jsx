@@ -9,6 +9,7 @@ const HomeRoute = (props) => {
       <TopNavigation
         topics={props.topics}
         isFavPhotoExist={props.favourites.length > 0}
+        onTopicSelect={props.onTopicSelect}
       />
       <PhotoList
         photos={props.photos}
