@@ -1,9 +1,11 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 
 const initialState = {
   displayModal: false,
-  favourites: []
+  favourites: [],
+  topicData: [],
+  photoData: []
 };
 
 export const ACTIONS = {
@@ -17,6 +19,10 @@ export const ACTIONS = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ACTIONS.SET_PHOTO_DATA:
+      return { ...state, photoData: action.payload };
+    case ACTIONS.SET_TOPIC_DATA:
+      return { ...state, topicData: action.payload };
     case ACTIONS.FAV_PHOTO_ADDED:
       return { ...state, favourites: [...state.favourites, action.payload] };
     case ACTIONS.FAV_PHOTO_REMOVED:
@@ -53,11 +59,31 @@ const useApplicationData = () => {
   const onClosePhotoDetailsModal = (value) => {
     dispatch({ type: ACTIONS.CLOSE_MODAL, payload: value });
   };
+
+  // Uses the same action as setting photos, no need to create a new one
+  const onTopicSelect = (id) => {
+    fetch(`/api/topics/photos/${id}`)
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
+  };
+
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
+  }, []);
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }));
+  }, []);
+
   return {
     state,
     updateToFavPhotoIds,
     onClosePhotoDetailsModal,
-    setPhotoSelected
+    setPhotoSelected,
+    onTopicSelect
   };
 };
 
