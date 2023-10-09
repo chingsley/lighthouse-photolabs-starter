@@ -12,11 +12,13 @@ module.exports = db => {
       json_agg(
           json_build_object(
             'id', photo.id,
+            'topicId', photo.topic_id,
             'urls', json_build_object(
               'full', concat('${serverUrl}/images/', photo.full_url),
               'regular', concat('${serverUrl}/images/', photo.regular_url)
             ),
             'user', json_build_object(
+              'id', user_account.id,
               'username', user_account.username,
               'name', user_account.fullname,
               'profile', concat('${serverUrl}/images/', user_account.profile_url)
@@ -30,6 +32,7 @@ module.exports = db => {
                 json_agg(
                   json_build_object(
                     'id', similar_photo.id,
+                    'topicId', similar_photo.topic_id,
                     'urls', json_build_object(
                       'full', concat('${serverUrl}/images/', similar_photo.full_url),
                       'regular', concat('${serverUrl}/images/', similar_photo.regular_url)
