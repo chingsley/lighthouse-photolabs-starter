@@ -11,7 +11,10 @@ module.exports = () => {
     const protocol = request.protocol;
     const host = request.hostname;
     const port = process.env.PORT || 8001;
-    const serverUrl = `${protocol}://${host}:${port}`;
+    let serverUrl = `${protocol}://${host}`;
+    if (host === 'localhost') {
+      serverUrl = `${protocol}://${host}:${port}`;
+    }
     return response.json(
       photos(serverUrl).filter(photo => Number(photo.topicId) === Number(request.params.id))
     );
